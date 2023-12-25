@@ -92,7 +92,7 @@ class AmazonStoreIE_GetThumb(AmazonStoreIE, plugin_name='amz_getimg'):
         for i in (jsonImage or {}):
             for colorimg in jsonImage[i]:
                 if colorimg.get('hiRes'):
-                    print(colorimg['hiRes'])
+                    # print(colorimg['hiRes'])
                     imagelst.append({
                         'url': colorimg['hiRes'],
                     })
