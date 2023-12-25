@@ -1,5 +1,4 @@
 # coding: utf-8
-from .common import InfoExtractor
 import json
 import re
 import ast
