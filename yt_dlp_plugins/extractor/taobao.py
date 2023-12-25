@@ -2,12 +2,13 @@
 import json
 import re
 import ast
-from ..utils import (
+from yt_dlp.utils import (
     # int_or_none,
     # js_to_json,
     # mimetype2ext,
     ExtractorError,
 )
+from yt_dlp.extractor.common import InfoExtractor
 
 
 class TmallIE(InfoExtractor):
@@ -29,10 +30,10 @@ class TmallIE(InfoExtractor):
         }
     }]
 
-    def _real_extract(self, url):
+    def _real_extract(self, gurl):
         pid = self._match_id(url)
-        webpage, urlh = self._download_webpage_handle(url, pid)
-        visitor_url = urlh.geturl()
+        webpage, urlh = self._download_webpage_handle(gurl, pid)
+        visitor_url = urlh.url
         if 'detail.tmall.com' in visitor_url:
             vid = self._search_regex(
                 r'"imgVedioID"\s*:\s*"?(\d+)"?',
@@ -78,10 +79,10 @@ class TaobaoIE(InfoExtractor):
         }
     }]
 
-    def _real_extract(self, url):
-        pid = self._match_id(url)
-        webpage, urlh = self._download_webpage_handle(url, pid)
-        visitor_url = urlh.geturl()
+    def _real_extract(self, gurl):
+        pid = self._match_id(gurl)
+        webpage, urlh = self._download_webpage_handle(gurl, pid)
+        visitor_url = urlh.url
         thumb = []
         if 'login.jhtml' in visitor_url:
             raise ExtractorError(
@@ -147,10 +148,10 @@ class TaobaoWorldIE(InfoExtractor):
         }
     }]
 
-    def _real_extract(self, url):
-        pid = self._match_id(url)
-        webpage, urlh = self._download_webpage_handle(url, pid)
-        visitor_url = urlh.geturl()
+    def _real_extract(self, gurl):
+        pid = self._match_id(gurl)
+        webpage, urlh = self._download_webpage_handle(gurl, pid)
+        visitor_url = urlh.url
         if 'login.jhtml' in visitor_url:
             raise ExtractorError(
                 'Lỗi đăng nhập Taobao - Cookies Error - Vui lòng báo lỗi cho hỗ trợ @cpanel10x',
@@ -236,9 +237,9 @@ class Ali1688IE(InfoExtractor):
         }
     }]
 
-    def _real_extract(self, url):
-        pid = self._match_id(url)
-        webpage, urlh = self._download_webpage_handle(url, pid)
+    def _real_extract(self, gurl):
+        pid = self._match_id(gurl)
+        webpage, urlh = self._download_webpage_handle(gurl, pid)
         # visitor_url = urlh.geturl()
         # debug print('visitor url %s' % visitor_url)
         uid = self._search_regex(
